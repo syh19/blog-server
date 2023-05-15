@@ -1,0 +1,7 @@
+node_modules
+upload
+logs
+
+.env
+
+src/utils/encrypt.js
