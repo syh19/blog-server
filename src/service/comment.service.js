@@ -39,7 +39,7 @@ class CommentService {
       }
     })
 
-    return utils.listToTree(res)
+    return utils.commentsListToTree(res)
   }
 }
 
