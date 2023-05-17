@@ -8,7 +8,7 @@ class TagService {
     const res = await Tag.create({
       name
     })
-    return res.dataValues
+    return res.dataValues.id
   }
 
   async removeTag (params) {
