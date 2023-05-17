@@ -31,7 +31,7 @@ class UserController {
   /**
    * 登录并获取token
    */
-  async loginToGetToken (ctx, next) {
+  async loginToGetUserInfo (ctx, next) {
     const params = ctx.request.body
     // 1. 获取用户信息（在token的payload中，记录id, account, is_admin）
     try {
@@ -40,6 +40,15 @@ class UserController {
         code: 0,
         msg: `欢迎回来，${res?.nickName}`,
         data: {
+          userInfo: {
+            id: res.id,
+            nickName: res.nickName,
+            avatar: res.avatar,
+            account: res.account,
+            email: res.email,
+            url: res.url,
+            status: res.status
+          },
           token: jwt.sign(res, JWT_SECRET, {
             expiresIn: '3d'
           })
@@ -55,7 +64,7 @@ class UserController {
     const id = ctx.state.user.id
     const password = ctx.request.body.password
     try {
-      if(await changePassword({ id, password })) {
+      if (await changePassword({ id, password })) {
         ctx.body = {
           code: 0,
           msg: '修改密码成功',
@@ -68,16 +77,16 @@ class UserController {
           data: null
         }
       }
-    } catch(err) {
+    } catch (err) {
       console.error('修改密码错误', err)
     }
   }
 
-  async changeInfo(ctx, next) {
+  async changeInfo (ctx, next) {
     const id = ctx.state.user.id
     const params = ctx.request.body
     try {
-      if(await changeInfo({id, ...params})) {
+      if (await changeInfo({ id, ...params })) {
         ctx.body = {
           code: 0,
           msg: '修改信息成功',
@@ -90,7 +99,7 @@ class UserController {
           data: null
         }
       }
-    } catch(err) {
+    } catch (err) {
       console.error('修改信息错误', err)
     }
   }

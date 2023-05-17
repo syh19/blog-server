@@ -35,7 +35,7 @@ class UserService {
     account && Object.assign(whereOpt, { account })
 
     const res = await User.findOne({
-      attributes: ['id', 'nickName', 'account', 'password', 'status'],
+      // attributes: ['id', 'nickName', 'avatar', 'account', 'status'],
       where: whereOpt
     })
     // console.log("我是返回的信息", res.dataValues)
@@ -58,7 +58,7 @@ class UserService {
   }
 
   /** 修改用户密码 */
-  async changePassword({ id, password }) {
+  async changePassword ({ id, password }) {
     const whereOpt = { id }
     const newUser = {}
 

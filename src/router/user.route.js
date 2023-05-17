@@ -4,7 +4,7 @@ const { isUserAlreadyExists, bcryptPassword, verifyLogin } = require('../middlew
 const { isLogin } = require('../middleware/auth.middleware')
 const { inputValidator } = require('../middleware/common.middleware')
 
-const { register, loginToGetToken, changePassword, changeInfo } = require('../controller/user.controller')
+const { register, loginToGetUserInfo, changePassword, changeInfo } = require('../controller/user.controller')
 
 const router = new Router({ prefix: '/user' })
 
@@ -35,7 +35,7 @@ router.post('/login', inputValidator({
     type: 'string',
     required: true
   }, password: 'string',
-}), verifyLogin, loginToGetToken)
+}), verifyLogin, loginToGetUserInfo)
 
 /** 修改用户信息 */
 router.patch('/info', inputValidator({
