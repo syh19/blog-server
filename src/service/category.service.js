@@ -1,4 +1,6 @@
 const Category = require('../model/category.model')
+
+const utils = require('../utils/func')
 class CategoryService {
 
   async createCategory (params) {
@@ -36,10 +38,10 @@ class CategoryService {
     const whereOpt = {}
     id && Object.assign(whereOpt, { parentId: id })
     const res = await Category.findAll({
-      attributes: ['id', 'name'],
+      attributes: ['id', 'name', 'parentId'],
       where: whereOpt
     })
-    return res
+    return utils.categroyListToTree(res)
   }
 }
 
