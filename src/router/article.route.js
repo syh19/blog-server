@@ -30,6 +30,9 @@ router.post('/update', inputValidator({
   }, categoryId: {
     type: 'number',
     required: false,
+  }, tags: {
+    type: 'array',
+    required: false
   }
 }), updateArticle)
 

@@ -6,28 +6,32 @@ class ArticleService {
 
   /** 添加或者更新文章 */
   async updateArticle (params) {
-    const { id, title, content, status, categoryId } = params
+    const { id, title, content, status, categoryId, tags } = params
     let newArticle = {}
     title && Object.assign(newArticle, { title })
     content && Object.assign(newArticle, { content })
     status && Object.assign(newArticle, { status })
     categoryId && Object.assign(newArticle, { categoryId })
-    console.log("new", newArticle, id)
-    let res = null
+    let article = null
     if (!id) {
-      res = await Article.create({
+      article = await Article.create({
         ...newArticle,
         likeNum: 0,
         readNum: 1
       })
     } else {
-      res = await Article.update(newArticle, {
+      await Article.update(newArticle, {
         where: {
           id
         }
       })
+      article = await Article.findByPk(id)
     }
-    return res
+    if (tags) {
+      let newTags = await Tag.findAll({ where: { id: tags } })  //找到对应的tagId对象
+      await article.addTags(newTags)
+    }
+    return article.id
   }
 
   /** 根据ID获取单篇文章 */
@@ -36,7 +40,7 @@ class ArticleService {
     try {
       const res = await Article.findByPk(id)
       return res
-    } catch(err) {
+    } catch (err) {
       console.error("获取文章失败", err)
     }
   }
