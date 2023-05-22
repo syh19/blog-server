@@ -53,6 +53,11 @@ module.exports = {
     msg: '不支持的文件格式',
     data: null
   },
+  fileUploadError: {
+    code: 10203,
+    msg: '文件上传出错',
+    data: null
+  },
   inputFormatError: {
     code: 10301,
     msg: '输入格式错误',

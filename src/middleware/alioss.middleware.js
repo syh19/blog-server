@@ -1,7 +1,7 @@
 const OSS = require('ali-oss')
 const path = require("path")
 
-const { unSupportedFileType } = require('../constant/err.type')
+const { unSupportedFileType, fileUploadError } = require('../constant/err.type')
 const { aliOSS } = require('../utils/encrypt')
 
 const client = new OSS({
@@ -27,8 +27,8 @@ const headers = {
 
 const uploadFile = async (ctx, next) => {
   try {
-    let { files } = ctx.request
-    let { file } = files
+    let file = ctx.request.files.file
+    console.log("我是附件", file)
     let { acceptTypeList, folder } = ctx.request.body
     if (acceptTypeList && !acceptTypeList.includes(file.mimetype)) {
       return ctx.app.emit('error', unSupportedFileType, ctx)
@@ -38,11 +38,16 @@ const uploadFile = async (ctx, next) => {
     } else {
       folder = ''
     }
+    const separatorIndex = file.originalFilename.lastIndexOf('.')
+    const fileName = file.originalFilename.substring(0, separatorIndex)
+    const suffix = file.originalFilename.substring(separatorIndex + 1, file.originalFilename.length)
     // 填写OSS文件完整路径和本地文件的完整路径。OSS文件完整路径中不能包含Bucket名称。
     // 如果本地文件的完整路径中未指定本地路径，则默认从示例程序所属项目对应本地路径中上传文件。
-    const result = await client.put(folder + file.originalFilename, file.filepath
-      , { headers }
+    const result = await client.put(folder + fileName + '-' + Date.now() + suffix,
+      file.filepath,
+      { headers }
     )
+    ctx.file = result
     ctx.body = {
       code: 0,
       data: {
@@ -51,8 +56,9 @@ const uploadFile = async (ctx, next) => {
       },
       msg: '上传成功'
     }
-  } catch (e) {
-    console.error(e)
+  } catch (err) {
+    fileUploadError.data = err.name
+    return ctx.app.emit('error', fileUploadError, ctx)
   }
   await next()
 }
