@@ -53,10 +53,15 @@ class ArticleService {
     // tagId && Object.assign(whereOpt, { id: tagId })
 
     const res = await Article.findAll({
-      attributes: ['id', 'title', 'status', 'likeNum', 'readNum'],
-      // include: [{
-      //   model: Tag
-      // }],
+      attributes:{
+        exclude: ['deletedAt']
+      },
+      include: [{
+        model: Tag,
+        attributes: {
+          include: ['id', 'name']
+        }
+      }],
       where: whereOpt
     })
     return res

@@ -17,6 +17,11 @@ const Article = seq.define('article',
       defaultValue: '无标题',
       comment: '文章标题'
     },
+    desc: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      comment: '文章的简介描述'
+    },
     content: {
       type: DataTypes.TEXT,
       allowNull: false,
@@ -39,6 +44,12 @@ const Article = seq.define('article',
       allowNull: false,
       defaultValue: 1,
       comment: '文章的阅读次数'
+    },
+    coverUrl: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      defaultValue: null,
+      comment: '文章的封面'
     }
     // createdAt: {
     //   type: DataTypes.DATE,
