@@ -19,17 +19,19 @@ const Article = seq.define('article',
     },
     desc: {
       type: DataTypes.TEXT,
-      allowNull: false,
+      allowNull: true,
+      defaultValue: '',
       comment: '文章的简介描述'
     },
     content: {
       type: DataTypes.TEXT,
-      allowNull: false,
+      allowNull: true,
+      defaultValue: '',
       comment: '文章的内容'
     },
     status: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       defaultValue: 0,
       comment: "文章状态，默认为草稿"
     },

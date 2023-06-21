@@ -34,7 +34,11 @@ router.post('/login', inputValidator({
   account: {
     type: 'string',
     required: true
-  }, password: 'string',
+  },
+  password: {
+    type: 'string',
+    required: true
+  },
 }), verifyLogin, loginToGetUserInfo)
 
 /** 修改用户信息 */

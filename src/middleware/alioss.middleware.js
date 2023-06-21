@@ -28,11 +28,10 @@ const headers = {
 const uploadFile = async (ctx, next) => {
   try {
     let file = ctx.request.files.file
-    console.log("我是附件", file)
-    let { acceptTypeList, folder } = ctx.request.body
-    if (acceptTypeList && !acceptTypeList.includes(file.mimetype)) {
-      return ctx.app.emit('error', unSupportedFileType, ctx)
-    }
+    let { folder } = ctx.request.body
+    // if (acceptTypeList && !acceptTypeList.includes(file.mimetype)) {
+    //   return ctx.app.emit('error', unSupportedFileType, ctx)
+    // }
     if (folder) {
       folder = folder + '/'
     } else {

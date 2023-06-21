@@ -40,17 +40,15 @@ class UserController {
         code: 0,
         msg: `欢迎回来，${res?.nickName}`,
         data: {
-          userInfo: {
-            id: res.id,
-            nickName: res.nickName,
-            avatar: res.avatar,
-            account: res.account,
-            email: res.email,
-            url: res.url,
-            status: res.status
-          },
+          uid: res.id,
+          // nickName: res.nickName,
+          avatar: res.avatar,
+          account: res.account,
+          // email: res.email,
+          url: res.url,
+          status: res.status,
           token: jwt.sign(res, JWT_SECRET, {
-            expiresIn: '3d'
+            expiresIn: '10h'
           })
         }
       }

@@ -22,15 +22,19 @@ router.post('/update', inputValidator({
   },
   content: {
     type: 'string',
-    required: true
-  }, status: {
+    required: false
+  }, 
+  status: {
     type: 'enum',
     // 0 草稿  |  1 公开  | 2 私有  |  3 未知
-    values: [0, 1, 2, 3]
-  }, categoryId: {
-    type: 'number',
     required: false,
-  }, tags: {
+    values: [0, 1, 2, 3]
+  }, 
+  categoryId: {
+    type: 'string',
+    required: false,
+  }, 
+  tags: {
     type: 'array',
     required: false
   }
