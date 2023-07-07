@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 
-const { JWT_SECRET } = require('../utils/encrypt')
+const { JWT_SECRET } = require('../config/config.default')
 const { tokenExpiredError, invalidToken, hasNotAdminPermission } = require('../constant/err.type')
 
 /** 判断是否登录，即是否获取了登录后的权限，通过有无token判断的 */

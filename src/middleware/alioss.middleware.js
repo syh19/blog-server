@@ -2,14 +2,14 @@ const OSS = require('ali-oss')
 const path = require("path")
 
 const { unSupportedFileType, fileUploadError } = require('../constant/err.type')
-const { aliOSS } = require('../utils/encrypt')
+const { ALIOSS_REGION,ALIOSS_ACCESSKEYID , ALIOSS_ACCESSKEYSECRET,ALIOSS_BUCKET  } = require('../config/config.default')
 
 const client = new OSS({
-  region: aliOSS.region,
+  region: ALIOSS_REGION,
   secure: true,  // secure: 配合region使用，如果指定了secure为true，则使用HTTPS访问  
-  accessKeyId: aliOSS.accessKeyId,
-  accessKeySecret: aliOSS.accessKeySecret,
-  bucket: aliOSS.bucket
+  accessKeyId: ALIOSS_ACCESSKEYID,
+  accessKeySecret: ALIOSS_ACCESSKEYSECRET,
+  bucket: ALIOSS_BUCKET
 })
 
 const headers = {

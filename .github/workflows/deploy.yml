@@ -28,8 +28,8 @@ jobs:  # 工作流所包含的job
           username: ${{ secrets.REMOTE_USERNAME }}
           password: ${{ secrets.REMOTE_PASSWORD }}
           port: 22
-          source: "/, !/src/utils/encrypt.js"
+          source: "/"
           target: "/www/wwwroot/blog-server"
           strip_components: 1  # 去除根目录
-          rm: true  # 删除原有文件
+          rm: false  # 删除原有文件
 

@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const { createUser, getUserInfo, changeInfo, changePassword } = require('../service/user.service')
 const { userRegisterError, userLoginError } = require('../constant/err.type')
 
-const { JWT_SECRET } = require('../utils/encrypt')
+const { JWT_SECRET } = require('../config/config.default')
 class UserController {
 
   /**
