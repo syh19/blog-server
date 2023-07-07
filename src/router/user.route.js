@@ -8,6 +8,15 @@ const { register, loginToGetUserInfo, changePassword, changeInfo } = require('..
 
 const router = new Router({ prefix: '/user' })
 
+/** 测试接口 */
+router.get('/test', (ctx, next) => {
+  ctx.body = {
+    code: 0,
+    data: '有数据',
+    msg: '接口部署成功'
+  }
+})
+
 /** 用户注册 */
 router.post('/register', inputValidator({
   nickName: 'string',

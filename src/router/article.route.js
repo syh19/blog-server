@@ -11,10 +11,10 @@ const router = new Router({ prefix: '/article' })
 
 /** 添加以及更新文章接口 */
 router.post('/update', inputValidator({
-  id: {
-    type: 'number',
-    required: false
-  },
+  // id: {
+  //   type: 'number',
+  //   required: false
+  // },
   title: {
     type: 'string',
     required: false,
@@ -24,12 +24,12 @@ router.post('/update', inputValidator({
     type: 'string',
     required: false
   }, 
-  status: {
-    type: 'enum',
-    // 0 草稿  |  1 公开  | 2 私有  |  3 未知
-    required: false,
-    values: [0, 1, 2, 3]
-  }, 
+  // status: {
+  //   type: 'enum',
+  //   // 0 草稿  |  1 公开  | 2 私有  |  3 未知
+  //   required: false,
+  //   values: [0, 1, 2, 3]
+  // }, 
   categoryId: {
     type: 'string',
     required: false,
