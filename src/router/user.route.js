@@ -12,7 +12,7 @@ const router = new Router({ prefix: '/user' })
 router.get('/test', (ctx, next) => {
   ctx.body = {
     code: 0,
-    data: '后端接口部署成功a3243453512l：' + new Date().getTime(),
+    data: '后端接口12l：' + new Date().getTime(),
     msg: '接口部署成功'
   }
 })
